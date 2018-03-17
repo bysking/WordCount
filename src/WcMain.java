@@ -6,7 +6,10 @@ public class WcMain
 
 	public static void main(String[] args) throws IOException 
 	{
-		int c=0,w=0,l = 0,o=0;
+		
+		
+	  
+		int c=0,w=0,l = 0,o=0,s=0;
 		
 		String inname=null;
 		String outname=null;
@@ -36,7 +39,11 @@ public class WcMain
 						
 					case "-o":
 						o=1;
-						break;								
+						break;	
+						
+					case "-s":
+						s=1;
+						break;	
 					}
 			}
 			
@@ -93,7 +100,22 @@ public class WcMain
 					ftest.save();
 					
 				}
-		
+           
+           if(s==1)
+           {
+				
+        	    String dirname = "./";
+        	    Fileop f1 = new Fileop(dirname);
+        	    f1.fun(dirname);
+        	    	
+        	    	
+        	    }
+        	    
+        	    
+        	    
+        	    
+        	    
+			}
 				
 	  
 	    
@@ -101,4 +123,3 @@ public class WcMain
 		 
    }	
 
-}
