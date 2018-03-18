@@ -80,7 +80,7 @@ public class File2 {
 		boolean currIsDelim;//分割符
 		for (int i = 0; i < c.length; i++)
 		{
-				if ((c[i] != ' ') && (c[i] != ',') && (c[i] != '\n')&&(c[i] != '=')&&(c[i] != '.')&&(c[i] != '(')&&(c[i] != ')')&&(c[i] != ' ')&&(c[i] != '{')&&(c[i] != '}')&&(c[i] != '\t')&&(c[i] != '\n')&&(c[i] != '/')&&(c[i] != '*')&&(c[i] != ';'))			
+				if ((c[i] != ' ') && (c[i] != '\n')&& (c[i] != ',') &&(c[i] != '=')&&(c[i] != '.')&&(c[i] != '(')&&(c[i] != ')')&&(c[i] != ' ')&&(c[i] != '{')&&(c[i] != '}')&&(c[i] != '\t')&&(c[i] != '\n')&&(c[i] != '/')&&(c[i] != '*')&&(c[i] != ';')&&(c[i] != '"')&&(c[i] != ' '))			
 					currIsDelim = false;
 				else
 					currIsDelim = true;
@@ -128,16 +128,28 @@ public class File2 {
 	// 结果存为文件
 	public boolean save(String name,int c,int w,int l,int a,int s,int e) throws IOException {
 		this.fileName=name;
+		int efunnum=0;
 		//System.out.println(outfileName);
 		//File2 f3 = new File2(name,outfileName,"=");
-		File writename = new File(outfileName); // 相对路径，如果没有则要建立一个新的output。txt文件
+		
+		File writename = new File(outfileName);
+		 
+	       if (!writename.exists())
+	       {	       
+	    	   writename.createNewFile();
+	       }
+		//File writename = new File(outfileName); // 相对路径，如果没有则要建立一个新的output。txt文件
 		writename.createNewFile(); // 创建新文件
 		BufferedWriter out = new BufferedWriter(new FileWriter(writename,true));	
 		
 		if(e==1){
 			//System.out.println("kaishichuli");
 			if(c==1)out.write(name+",字符数:"+Integer.toString(zCount()) + "\r\n"); // \r\n即为换行
-			if(w==1)out.write(name+",停用词表单词数:"+Integer.toString(efun()) + "\r\n");
+			if(w==1){
+				      efunnum=efun();
+				out.write(name+",停用词表单词数:"+Integer.toString(efunnum) + "\r\n");
+				
+			}
 			if(l==1)out.write(name+",行数:"+Integer.toString(hCount()) + "\r\n");
 			if(a==1)afun();
 			if(s==1){
@@ -216,10 +228,13 @@ public class File2 {
 		out.close();
 	}
 	
-	public int efun() throws IOException {
+	public int efun() throws IOException 
+	
+	{
 		//---------------------------
 		String str2 = "";
 		String tmp;
+		//System.out.println(stopfileName);
 		BufferedReader br2 = new BufferedReader(new FileReader(stopfileName));
 		while ((tmp = br2.readLine()) != null) {
 			str2+=tmp+' ';
@@ -248,7 +263,7 @@ public class File2 {
 		String word1="";
 		for(int i=0;i<str21.length();i++){
 			ch1=str21.charAt(i);
-			if(ch1!=' '&&(ch1!='(')&&(ch1!=')')&&(ch1!='{')&&(ch1!='}')&&(ch1!=',')&&(ch1!=';')&&(ch1!='\t')&&(ch1!='/')&&(ch1!='*')&&(ch1!='=')&&(ch1!='.'))
+			if(ch1!='"'&&ch1!='"'&&ch1!=' '&&(ch1!='(')&&(ch1!=')')&&(ch1!='{')&&(ch1!='}')&&(ch1!=',')&&(ch1!=';')&&(ch1!='\t')&&(ch1!='\n')&&(ch1!='/')&&(ch1!='*')&&(ch1!='=')&&(ch1!='.'))
 				word1+=ch1;
 			else if(!word1.isEmpty()){
 				sl2.add(word1);
@@ -258,6 +273,7 @@ public class File2 {
 		// Pattern pat = Pattern.compile("[`~!@#$^&*()=|{}':;',\\[\\].
 		// <>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]$");
 		int count = 0;		
+		/*
 		System.out.println("被检查表sl2");
 		for (int i = 0; i < sl2.size(); i++)
 		{
@@ -271,6 +287,7 @@ public class File2 {
 			System.out.println(sl.get(j));
 			
 		}
+		*/
 		System.out.println("相同字符");
 		
 		for (int i = 0; i < sl2.size(); i++)
@@ -280,14 +297,14 @@ public class File2 {
 				
 				if(sl2.get(i).matches(sl.get(j)))
 				{
-					count++;
 					System.out.println(sl2.get(i));
+					count++;					
 				}
 					
 			}
 			
 		}
-		//System.out.println(sl2.size()-count);
+		System.out.println("使用停表后的单词数："+(sl2.size()-count));
 		return sl2.size()-count;
 	}
 	

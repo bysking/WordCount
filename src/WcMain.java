@@ -16,6 +16,7 @@ public class WcMain
 		for(int i=0;i<args.length;i++)
 		{
 			//解析参数
+			//System.out.println(args[i]);
 			if(args[i].startsWith("-"))
 				
 			{
@@ -80,7 +81,7 @@ public class WcMain
 			
 		}
 		
-		
+		//System.out.println(outname);
 		
 		if(c==1){
 			        if(outname==null){
@@ -89,10 +90,16 @@ public class WcMain
 			        	System.out.println(inname+','+"字符数："+ftest.zCount());
 			        	ftest.save(inname,c,w,l,a,s,e);
 			        }
+			        else if(stopname!=null){
+			        	//System.out.println(outname);
+			        	File2 ftest=new File2(inname,outname,stopname);
+			        	//System.out.println(inname+','+"字符数："+ftest.zCount());
+			        	ftest.save(inname,c,w,l,a,s,e);
+			        }
 			        else{
 			        	//System.out.println(outname);
 			        	File2 ftest=new File2(inname,outname);
-			        	System.out.println(inname+','+"字符数："+ftest.zCount());
+			        	//System.out.println(inname+','+"字符数："+ftest.zCount());
 			        	ftest.save(inname,c,w,l,a,s,e);
 			        }
 					
@@ -106,24 +113,36 @@ public class WcMain
 							
 							File2 ftest=new File2(inname,"result.txt",stopname);
 							ftest.save(inname,c,w,l,a,s,e);
-							System.out.println(inname+','+"停用词表后单词数："+ftest.efun());
+							//System.out.println(inname+','+"停用词表后单词数："+ftest.efun());
 						}
 						else {
+							
 							File2 ftest=new File2(inname,outname,stopname);
-						System.out.println(inname+','+"停用词表后单词数："+ftest.efun());
+						//System.out.println(inname+','+"停用词表后单词数："+ftest.efun());
 						ftest.save(inname,c,w,l,a,s,e);
 						
 					  	}
 						
-					e=0;
+					
 					     }
 					else{
-						
-						File2 ftest=new File2(inname,"result.txt");
-						
-						System.out.println(inname+','+"单词数："+ftest.ciCount());
-						ftest.save(inname,c,w,l,a,s,e);
+						if(outname==null){
+							//System.out.println("66666666");
+							File2 ftest=new File2(inname,"result.txt");
+							
+							System.out.println(inname+','+"单词数："+ftest.ciCount());
+							ftest.save(inname,c,w,l,a,s,e);
+						}
+						else{
+							
+							File2 ftest=new File2(inname,outname);
+							
+							System.out.println(inname+','+"单词数："+ftest.ciCount());
+							ftest.save(inname,c,w,l,a,s,e);
+						}
 					}
+					
+					//System.out.println("66666666");
 					w=0;	
 					
 				}
@@ -149,17 +168,18 @@ public class WcMain
            if(o==1){
 					//System.out.println(outname);
         	   if(e==1){
-        		   
+        		   //System.out.println(outname);
         		   //System.out.println(inname+outname+stopname);
         		   File2 ftest=new File2(inname,outname,stopname);
 			
         		   ftest.save(inname,c,w,l,a,s,e);
-        		  e=0; 
+        		  
         	   }
+        	   
         	   else{
         		   
         		   File2 ftest=new File2(inname,outname);
-        		  // System.out.println(inname);
+        		    //System.out.println(outname);
 				   ftest.save(inname,c,w,l,a,s,e);
 					
         		   
@@ -177,15 +197,24 @@ public class WcMain
         	    	f1op.fun(dirname,c,w,l,a,s,e);
         	    }
         	    Fileop f1op = new Fileop(dirname,outname,"result.txt");
-        	    f1op.fun(dirname,c,w,l,a,s,e);      	    	
+        	    f1op.fun(dirname,c,w,l,a,s,e);  
+        	    s=0;
         	    }
         	    
-           if(a==1&&(outname!=null)){
+           if(a==1){
 				//System.out.println(inname);
 				//System.out.println(outname);
-				File2 ftest=new File2(inname,outname);
-				ftest.afun();
-				
+        	   if(outname==null){
+        		   File2 ftest=new File2(inname,"result.txt");
+   				  ftest.afun(); 
+        		   
+        	   }
+        	   else{
+        		   File2 ftest=new File2(inname,outname);
+   				  ftest.afun(); 
+        		   
+        	   }
+				a=0;
 			}    
         	  /*  
            if(e==1){
