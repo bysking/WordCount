@@ -14,7 +14,7 @@ public class WcMain
 		
 		for(int i=0;i<args.length;i++)
 		{
-			System.out.println(args[i]);
+			//System.out.println(args[i]);
 			if(args[i].startsWith("-"))
 				
 			{
@@ -53,7 +53,7 @@ public class WcMain
 						default:
 								
 				}		
-			
+				
 		}	
 		
 			
@@ -71,8 +71,9 @@ public class WcMain
 					
 					
 				}
+				
 				else inname=args[i];	 							 
-					    	
+				    	
 		     	}
 			 
 			
@@ -85,15 +86,16 @@ public class WcMain
 			        	
 			        	File2 ftest=new File2(inname,"result.txt");
 			        	System.out.println(inname+','+"字符数："+ftest.zCount());
-			        	ftest.save(inname,c,w,l,a,s,e);c=0;
+			        	ftest.save(inname,c,w,l,a,s,e);
 			        }
 			        else{
+			        	//System.out.println(outname);
 			        	File2 ftest=new File2(inname,outname);
 			        	System.out.println(inname+','+"字符数："+ftest.zCount());
-			        	ftest.save(inname,c,w,l,a,s,e);c=0;
+			        	ftest.save(inname,c,w,l,a,s,e);
 			        }
 					
-					
+					c=0;
 				}
 				
          if(w==1){
@@ -102,67 +104,67 @@ public class WcMain
 						if(outname==null){
 							
 							File2 ftest=new File2(inname,"result.txt",stopname);
-							ftest.save(inname,c,w,l,a,s,e);w=0;
+							ftest.save(inname,c,w,l,a,s,e);
 							System.out.println(inname+','+"停用词表后单词数："+ftest.efun());
 						}
 						else {
 							File2 ftest=new File2(inname,outname,stopname);
 						System.out.println(inname+','+"停用词表后单词数："+ftest.efun());
 						ftest.save(inname,c,w,l,a,s,e);
-						w=0;
-						}
 						
+					  	}
 						
-					}
+					e=0;
+					     }
 					else{
 						
 						File2 ftest=new File2(inname,"result.txt");
 						
 						System.out.println(inname+','+"单词数："+ftest.ciCount());
-						ftest.save(inname,c,w,l,a,s,e);w=0;
+						ftest.save(inname,c,w,l,a,s,e);
 					}
-					
+					w=0;	
 					
 				}
 				
 				
-          if(l==1){
+          if(l==1){//System.out.println(outname);
 					if(outname==null){
 						
 						File2 ftest=new File2(inname,"result.txt");
 						System.out.println(inname+','+"行数："+ftest.hCount());
-						ftest.save(inname,c,w,l,a,s,e);l=0;
+						ftest.save(inname,c,w,l,a,s,e);
 					}
 					else{
 						
 						File2 ftest=new File2(inname,outname);
 						System.out.println(inname+','+"行数："+ftest.hCount());
-						ftest.save(inname,c,w,l,a,s,e);l=0;
+						ftest.save(inname,c,w,l,a,s,e);
 						
 					}
-					
+					l=0;
 				}
              
            if(o==1){
-					//System.out.println(inname);
+					//System.out.println(outname);
         	   if(e==1){
         		   
         		   //System.out.println(inname+outname+stopname);
         		   File2 ftest=new File2(inname,outname,stopname);
 			
         		   ftest.save(inname,c,w,l,a,s,e);
-        		   
+        		  e=0; 
         	   }
         	   else{
         		   
         		   File2 ftest=new File2(inname,outname);
-        		   System.out.println(inname);
+        		  // System.out.println(inname);
 				   ftest.save(inname,c,w,l,a,s,e);
 					
         		   
         	   }
-					
-				}
+					o=0;
+			}
            
            if(s==1)
            {
@@ -171,8 +173,9 @@ public class WcMain
         	    if(e==1){
         	    	
         	    	Fileop f1op = new Fileop(dirname,outname,stopname);
+        	    	f1op.fun(dirname,c,w,l,a,s,e);
         	    }
-        	    Fileop f1op = new Fileop(dirname,outname,"=");
+        	    Fileop f1op = new Fileop(dirname,outname,"result.txt");
         	    f1op.fun(dirname,c,w,l,a,s,e);      	    	
         	    }
         	    

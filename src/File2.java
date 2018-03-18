@@ -135,17 +135,17 @@ public class File2 {
 		BufferedWriter out = new BufferedWriter(new FileWriter(writename,true));	
 		
 		if(e==1){
-			System.out.println("kaishichuli");
+			//System.out.println("kaishichuli");
 			if(c==1)out.write(name+",字符数:"+Integer.toString(zCount()) + "\r\n"); // \r\n即为换行
 			if(w==1)out.write(name+",停用词表单词数:"+Integer.toString(efun()) + "\r\n");
 			if(l==1)out.write(name+",行数:"+Integer.toString(hCount()) + "\r\n");
 			if(a==1)afun();
-//			if(s==1){
-//				
-//				out.write(name+",字符数:"+Integer.toString(f3.zCount()) + "\r\n");
-//				out.write(name+",单词数:"+Integer.toString(f3.efun()) + "\r\n");
-//				out.write(name+",行数:"+Integer.toString(f3.hCount()) + "\r\n");
-//			}
+			if(s==1){
+				
+				out.write(name+",字符数:"+Integer.toString(zCount()) + "\r\n");
+				out.write(name+",单词数:"+Integer.toString(efun()) + "\r\n");
+				out.write(name+",行数:"+Integer.toString(hCount()) + "\r\n");
+			}
 			
 		}
 		else{
@@ -153,8 +153,12 @@ public class File2 {
 			if(c==1)out.write(name+",字符数:"+Integer.toString(zCount()) + "\r\n"); // \r\n即为换行
 			if(w==1)out.write(name+",单词数:"+Integer.toString(ciCount()) + "\r\n");
 			
-			if(l==1)out.write(name+",行数:"+Integer.toString(hCount()) + "\r\n");
-			if(a==1)afun();
+			if(l==1)
+				out.write(name+",行数:"+Integer.toString(hCount()) + "\r\n");
+			
+		
+			if(a==1) afun();
+			
 			if(s==1){
 				out.write(name+",字符数:"+Integer.toString(zCount()) + "\r\n");
 				out.write(name+",单词数:"+Integer.toString(ciCount()) + "\r\n");
