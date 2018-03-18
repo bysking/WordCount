@@ -4,17 +4,18 @@ public class WcMain
 {
 
 	public static void main(String[] args) throws IOException 
-	{	  
-		int c=0,w=0,l = 0,o=0,s=0,a=0,e=0;		
-		String inname=null;		
-		String outname=null;		
-		String stopname=null;
+	{	 //控制变量，用来选择解析参数完毕后的执行操作 
+		int c=0,w=0,l = 0,o=0,s=0,a=0,e=0;	
+		
+		String inname=null;	//输入文件名	
+		String outname=null;//输出文件名		
+		String stopname=null;//停用词表
 		
 		//
 		
 		for(int i=0;i<args.length;i++)
 		{
-			//System.out.println(args[i]);
+			//解析参数
 			if(args[i].startsWith("-"))
 				
 			{
@@ -55,7 +56,7 @@ public class WcMain
 				}		
 				
 		}	
-		
+		//程序的变量初始赋值
 			
 			else {
 				if(i>0){

@@ -3,11 +3,11 @@ import java.io.IOException;
 import java.util.regex.Pattern;
 
 public class Fileop {
-
+//文件的递归处理
 	String filename;
 	String outfilename;
 	String stopname;
-	
+	//设置两个构造方法
 	public Fileop(String filename,String outfilename){
 		
 		this.filename=filename;
@@ -21,6 +21,8 @@ public Fileop(String filename,String outfilename,String stopname){
 		this.stopname=stopname;
 	//	System.out.println(outfilename);
 	}
+
+//递归。定义一个fun函数
 public void fun(String ff,int c,int w,int l,int a,int ss,int e) throws IOException{
 	//System.out.println(ff);
     String fnm=ff;
@@ -68,6 +70,7 @@ public void fun(String ff,int c,int w,int l,int a,int ss,int e) throws IOExcepti
     }
     else 
     {
+    	//不做处理
      // System.out.println(fnm + " 不是一个目录");
     }
 	

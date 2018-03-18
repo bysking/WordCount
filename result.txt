@@ -17,3 +17,5 @@ file.c,单词数:21
 file.c,行数:9
 file.c,单词数:21
 file.c,行数:9
+file.c,单词数:21
+file.c,行数:9
