@@ -5,42 +5,61 @@ import java.util.regex.Pattern;
 public class Fileop {
 
 	String filename;
+	String outfilename;
+	String stopname;
 	
-	public Fileop(String filename){
+	public Fileop(String filename,String outfilename){
 		
 		this.filename=filename;
-	
+		this.outfilename=outfilename;
 	}
 	
-public void fun(String ff) throws IOException{
-	
+public Fileop(String filename,String outfilename,String stopname){
+		
+		this.filename=filename;
+		this.outfilename=outfilename;
+		this.stopname=stopname;
+	//	System.out.println(outfilename);
+	}
+public void fun(String ff,int c,int w,int l,int a,int ss,int e) throws IOException{
+	//System.out.println(ff);
     String fnm=ff;
+   // System.out.println(fnm);
     File f1 = new File(fnm);
     if (f1.isDirectory()) 
     {
-	      System.out.println( "在当前目录： " + fnm);
+	      //System.out.println( "在当前目录： " + fnm);
 	      String s[] = f1.list();
 	      for (int i=0; i < s.length; i++) 
 	      {
 		        File f = new File(fnm + "/" + s[i]);
 		        if (f.isDirectory())
 		        {
-		          System.out.println(s[i] + " 是一个目录");
-		          this.fun(s[i]);
+		         //System.out.println(s[i] + " 是一个目录");
+		          this.fun(s[i],c,w,l,a,ss,e);
 		        
 		        } 
-		        else 
+		        else if(s[i]!=stopname)
 		        {
-		        	String pattern = ".*.txt.*";
+		        	String pattern = ".*.txt";
 		        
 		        boolean isMatch = Pattern.matches(pattern, s[i]);
-		        if(isMatch){
+		        if(isMatch&&(s[i]!="stop.txt")){
+		        	//System.out.println(isMatch);
+		        	//System.out.println(s[i] + " 是一个文件");
 		        	
-		        	 System.out.println(s[i] + " 是一个文件");
-			            File2 ftest=new File2(s[i],"=");
-			            System.out.println(s[i]+','+"字符数："+ftest.zCount());
-						System.out.println(s[i]+','+"单词数："+ftest.ciCount());
-						System.out.println(s[i]+','+"行数："+ftest.hCount());
+			            File2 ftest=new File2(s[i],outfilename,stopname);
+						//ftest.save(c,w,l,a,ss,e);
+			        //  if(c==1)  System.out.println(s[i]+','+"字符数："+ftest.zCount());
+			         
+			           ftest.save(s[i],c,w,l,a,ss,e);
+			          
+			         // if(w==1) System.out.println(s[i]+','+"单词数："+ftest.ciCount());
+			          
+			          
+			          
+			         // if(l==1) System.out.println(s[i]+','+"行数："+ftest.hCount());
+			        
 		        	
 		        }
 		        //else System.out.println("不存在类型为："+pattern+"的文件");
@@ -49,7 +68,7 @@ public void fun(String ff) throws IOException{
     }
     else 
     {
-      System.out.println(fnm + " 不是一个目录");
+     // System.out.println(fnm + " 不是一个目录");
     }
 	
 	
