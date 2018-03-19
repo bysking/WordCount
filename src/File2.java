@@ -80,7 +80,7 @@ public class File2 {
 		boolean currIsDelim;//·Ö¸î·û
 		for (int i = 0; i < c.length; i++)
 		{
-				if ((c[i] != ' ') && (c[i] != '\n')&& (c[i] != ',') &&(c[i] != '=')&&(c[i] != '.')&&(c[i] != '(')&&(c[i] != ')')&&(c[i] != ' ')&&(c[i] != '{')&&(c[i] != '}')&&(c[i] != '\t')&&(c[i] != '\n')&&(c[i] != '/')&&(c[i] != '*')&&(c[i] != ';')&&(c[i] != '"')&&(c[i] != ' '))			
+				if ((c[i] != ' ')&& (c[i] != '\n')&& (c[i] != ',')&&(c[i] != '\t'))			
 					currIsDelim = false;
 				else
 					currIsDelim = true;
@@ -244,7 +244,7 @@ public class File2 {
 		String word="";
 		for(int i=0;i<str2.length();i++){
 			ch=str2.charAt(i);
-			if(ch!=' '&&ch!=',')
+			if(ch!=' '&&ch!=','&&ch!='\t'&&ch!='\n')
 				word+=ch;
 			else if(!word.isEmpty()){
 				sl.add(word);
@@ -263,7 +263,7 @@ public class File2 {
 		String word1="";
 		for(int i=0;i<str21.length();i++){
 			ch1=str21.charAt(i);
-			if(ch1!='"'&&ch1!='"'&&ch1!=' '&&(ch1!='(')&&(ch1!=')')&&(ch1!='{')&&(ch1!='}')&&(ch1!=',')&&(ch1!=';')&&(ch1!='\t')&&(ch1!='\n')&&(ch1!='/')&&(ch1!='*')&&(ch1!='=')&&(ch1!='.'))
+			if(ch1!=' '&&ch1!=','&&ch1!='\t'&&(ch1!='\n'))
 				word1+=ch1;
 			else if(!word1.isEmpty()){
 				sl2.add(word1);
