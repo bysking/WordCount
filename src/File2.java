@@ -203,17 +203,24 @@ public class File2 {
 		InputStreamReader reader = new InputStreamReader(new FileInputStream(f));
 		// 建立一个对象，它把文件内容转成计算机能读懂的语言
 		BufferedReader br = new BufferedReader(reader);
+		
 		String line = "";
 
 		while ((line = br.readLine()) != null) {
-
+			daima++;
 			String pattern = ".*\\s*//.*";
-			boolean isMatch = Pattern.matches(pattern, line);
+			boolean isMatch = Pattern.matches(pattern, line);	
 			if (isMatch)
 				zhushi++;
-			String pattern2 = "\\s*\\t*";
+			
+			String pattern2 = "\\s*\\{\\s*";/*单独在一行中出现“{”*/
 			boolean isMatch2 = Pattern.matches(pattern2, line);
-			if (isMatch2 || line.length() == 1)
+			String pattern3 = "\\s*\\}\\s*";/*单独在一行中出现“}”*/
+			boolean isMatch3 = Pattern.matches(pattern3, line);
+			String pattern4 = "\\s*";/*匹配空行*/
+			boolean isMatch4 = Pattern.matches(pattern4, line);
+			
+			if (isMatch2||isMatch3||isMatch4)
 				kong++;
 
 		}br.close();
@@ -222,8 +229,8 @@ public class File2 {
 		File writename = new File(outfileName); // 相对路径，如果没有则要建立一个新的output。txt文件
 		writename.createNewFile(); // 创建新文件
 		BufferedWriter out = new BufferedWriter(new FileWriter(writename,true));
-		out.write(this.fileName+",代码行/空行/注释行:"+Integer.toString(daima)+"/" +Integer.toString(zhushi)+"/"+Integer.toString(kong)+ "\r\n");
-		System.out.println(fileName+",代码行/注释行/空行:" + (daima) + "/" + zhushi + "/" + (kong));
+		out.write(this.fileName+",代码行/空行/注释行:"+Integer.toString(daima-kong-zhushi)+"/" +Integer.toString(kong)+"/"+Integer.toString(zhushi)+ "\r\n");
+		System.out.println(fileName+",代码行/空行/注释行:" + (daima-kong-zhushi) + "/" + kong + "/" + zhushi);
 		out.flush(); // 把缓存区内容压入文件
 		out.close();
 	}
@@ -234,9 +241,12 @@ public class File2 {
 		//---------------------------
 		String str2 = "";
 		String tmp;
-		//System.out.println(stopfileName);
+//		int stf=0;
+//		int inf=0;
+		
 		BufferedReader br2 = new BufferedReader(new FileReader(stopfileName));
 		while ((tmp = br2.readLine()) != null) {
+				 
 			str2+=tmp+' ';
 		}
 		br2.close();
@@ -248,9 +258,11 @@ public class File2 {
 				word+=ch;
 			else if(!word.isEmpty()){
 				sl.add(word);
+				//stf++;
 				word="";
 			}
 		}
+		System.out.println();
 //----------------------------
 		String str21 = "";
 		String tmp1;
@@ -267,6 +279,7 @@ public class File2 {
 				word1+=ch1;
 			else if(!word1.isEmpty()){
 				sl2.add(word1);
+				//inf++;
 				word1="";
 			}
 		}
@@ -288,7 +301,7 @@ public class File2 {
 			
 		}
 		*/
-		System.out.println("相同字符");
+		//System.out.println("相同字符");
 		
 		for (int i = 0; i < sl2.size(); i++)
 		{
@@ -297,14 +310,17 @@ public class File2 {
 				
 				if(sl2.get(i).matches(sl.get(j)))
 				{
-					System.out.println(sl2.get(i));
+					//System.out.println(sl2.get(i));
 					count++;					
 				}
 					
 			}
 			
 		}
-		System.out.println("使用停表后的单词数："+(sl2.size()-count));
+//		System.out.println("输入文件单词数"+inf);
+//		System.out.println("停表单词数"+stf);
+//		System.out.println("相同单词数："+(count));
+	    System.out.println(fileName+",单词数："+(sl2.size()-count));
 		return sl2.size()-count;
 	}
 	

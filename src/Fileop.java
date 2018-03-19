@@ -43,7 +43,7 @@ public void fun(String ff,int c,int w,int l,int a,int ss,int e) throws IOExcepti
 		        } 
 		        else if(s[i]!=stopname)
 		        {
-		        	String pattern = ".*.txt";
+		        	String pattern = ".*.c";
 		        
 		        boolean isMatch = Pattern.matches(pattern, s[i]);
 		        if(isMatch&&(s[i]!="stop.txt")){
