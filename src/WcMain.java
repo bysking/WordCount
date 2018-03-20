@@ -86,24 +86,48 @@ public class WcMain
 		if(c==1){
 			        if(outname==null){
 			        	
-			        	File2 ftest=new File2(inname,"result.txt");
-			        	System.out.println(inname+','+"字符数："+ftest.zCount());
-			        	ftest.save(inname,c,w,l,a,s,e);
+			        	 if(stopname!=null){
+					        	//System.out.println(outname);
+					        	File2 ftest=new File2(inname,"result.txt",stopname);
+					        	System.out.println(inname+','+"字符数："+ftest.efun());
+					        	ftest.save(inname,1,0,0,0,0,1);
+					        }
+			        	 
+			        	 else{
+			        		 
+			        		 File2 ftest=new File2(inname,"result.txt");
+					        	System.out.println(inname+','+"字符数："+ftest.zCount());
+					        	ftest.save(inname,1,0,0,0,0,0);
+					        	//ftest.save(inname,c,w,l,a,s,e);
+			        	 }
+			        	
+			        	
+			        	
 			        }
-			        else if(stopname!=null){
+			        else{ //outname!=null
+			        //	System.out.println(inname);
 			        	//System.out.println(outname);
-			        	File2 ftest=new File2(inname,outname,stopname);
-			        	//System.out.println(inname+','+"字符数："+ftest.zCount());
-			        	ftest.save(inname,c,w,l,a,s,e);
+			        	//System.out.println(stopname);
+			        	 if(stopname!=null){
+					        	
+					        	File2 ftest=new File2(inname,outname,stopname);
+					        	System.out.println(inname+','+"字符数："+ftest.efun());
+					        	ftest.save(inname,1,0,0,0,0,1);
+					        }
+			        	 
+			        	 else{//stopname==null
+			        		
+			        		 File2 ftest=new File2(inname,outname);
+					        	System.out.println(inname+','+"字符数："+ftest.zCount());
+					        	ftest.save(inname,1,0,0,0,0,0);
+			        	 }
+			        	
 			        }
-			        else{
-			        	//System.out.println(outname);
-			        	File2 ftest=new File2(inname,outname);
-			        	//System.out.println(inname+','+"字符数："+ftest.zCount());
-			        	ftest.save(inname,c,w,l,a,s,e);
-			        }
+			        
+			       
+			       
 					
-					c=0;
+					//c=0;
 				}
 				
          if(w==1){
@@ -112,14 +136,15 @@ public class WcMain
 						if(outname==null){
 							
 							File2 ftest=new File2(inname,"result.txt",stopname);
-							ftest.save(inname,c,w,l,a,s,e);
-							//System.out.println(inname+','+"停用词表后单词数："+ftest.efun());
+							ftest.save(inname,0,1,0,0,0,1);
+//							ftest.save(inname,c,w,l,0,0,e);
+							System.out.println(inname+','+"停用词表后单词数："+ftest.efun());
 						}
 						else {
 							
 							File2 ftest=new File2(inname,outname,stopname);
-						//System.out.println(inname+','+"停用词表后单词数："+ftest.efun());
-						ftest.save(inname,c,w,l,a,s,e);
+						System.out.println(inname+','+"停用词表后单词数："+ftest.efun());
+						ftest.save(inname,0,1,0,0,0,1);
 						
 					  	}
 						
@@ -131,101 +156,77 @@ public class WcMain
 							File2 ftest=new File2(inname,"result.txt");
 							
 							System.out.println(inname+','+"单词数："+ftest.ciCount());
-							ftest.save(inname,c,w,l,a,s,e);
+							ftest.save(inname,0,w,0,a,s,e);
 						}
 						else{
 							
 							File2 ftest=new File2(inname,outname);
 							
 							System.out.println(inname+','+"单词数："+ftest.ciCount());
-							ftest.save(inname,c,w,l,a,s,e);
+							ftest.save(inname,0,w,0,a,s,e);
 						}
 					}
 					
 					//System.out.println("66666666");
-					w=0;	
+					//w=0;	
 					
 				}
 				
 				
-          if(l==1){//System.out.println(outname);
+          if(l==1){
+        	  
+        	  //System.out.println(outname);
 					if(outname==null){
 						
 						File2 ftest=new File2(inname,"result.txt");
 						System.out.println(inname+','+"行数："+ftest.hCount());
-						ftest.save(inname,c,w,l,a,s,e);
+						ftest.save(inname,0,0,l,0,0,0);
 					}
 					else{
-						
+						//System.out.println("888888888888888");
 						File2 ftest=new File2(inname,outname);
 						System.out.println(inname+','+"行数："+ftest.hCount());
-						ftest.save(inname,c,w,l,a,s,e);
+						ftest.save(inname,0,0,l,0,0,0);
 						
 					}
-					l=0;
+					//l=0;
 				}
-             
-           if(o==1){
-					//System.out.println(outname);
-        	   if(e==1){
-        		   //System.out.println(outname);
-        		   //System.out.println(inname+outname+stopname);
-        		   File2 ftest=new File2(inname,outname,stopname);
-			
-        		   ftest.save(inname,c,w,l,a,s,e);
-        		  
-        	   }
-        	   
-        	   else{
-        		   
-        		   File2 ftest=new File2(inname,outname);
-        		    //System.out.println(outname);
-				   ftest.save(inname,c,w,l,a,s,e);
-					
-        		   
-        	   }
-					o=0;
-			}
-           
+                     
            if(s==1)
            {
+        	  
         	    String dirname = "./";
         	    //System.out.println(stopname);
-        	    if(e==1){
-        	    	
+        	    if(e==1){        	    	
         	    	Fileop f1op = new Fileop(dirname,outname,stopname);
-        	    	f1op.fun(dirname,c,w,l,a,s,e);
+        	    	f1op.fun(dirname,c,w,l,0,1,e);
         	    }
-        	    Fileop f1op = new Fileop(dirname,outname,"result.txt");
-        	    f1op.fun(dirname,c,w,l,a,s,e);  
-        	    s=0;
+        	    else{
+        	    	 Fileop f1op = new Fileop(dirname,outname,"result.txt");
+             	     f1op.fun(dirname,c,w,l,0,s,e);         	    	
+        	     }  
+        	    //s=0;
         	    }
         	    
            if(a==1){
+        	  // System.out.println("23456789");
 				//System.out.println(inname);
 				//System.out.println(outname);
         	   if(outname==null){
         		   File2 ftest=new File2(inname,"result.txt");
-   				  ftest.afun(); 
+   				   ftest.afun(); 
         		   
         	   }
         	   else{
+        		   
         		   File2 ftest=new File2(inname,outname);
-   				  ftest.afun(); 
+   				   ftest.afun(); 
         		   
         	   }
-				a=0;
-			}    
-        	  /*  
-           if(e==1){
-        		System.out.println(inname+outname+stopname);
-				File2 ftest=new File2(inname,outname,stopname);
-			
-				System.out.println(inname+','+"停用词表单词数："+ftest.efun());
 				
 			}    
-        	    */
-			}
+
+		}
 				
 	  
 	    

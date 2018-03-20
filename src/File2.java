@@ -55,7 +55,8 @@ public class File2 {
 
 		br.close();
 
-		// System.out.println(z+z2);
+	   
+		
 		return z + z2 - 1;
 
 	}
@@ -129,7 +130,7 @@ public class File2 {
 	public boolean save(String name,int c,int w,int l,int a,int s,int e) throws IOException {
 		this.fileName=name;
 		int efunnum=0;
-		//System.out.println(outfileName);
+		//System.out.println("beidiaoyongle"+c+w+l);
 		//File2 f3 = new File2(name,outfileName,"=");
 		
 		File writename = new File(outfileName);
@@ -146,37 +147,42 @@ public class File2 {
 			//System.out.println("kaishichuli");
 			if(c==1)out.write(name+",字符数:"+Integer.toString(zCount()) + "\r\n"); // \r\n即为换行
 			if(w==1){
-				      efunnum=efun();
+				
+				efunnum=efun();
 				out.write(name+",停用词表单词数:"+Integer.toString(efunnum) + "\r\n");
 				
 			}
+			
 			if(l==1)out.write(name+",行数:"+Integer.toString(hCount()) + "\r\n");
-			if(a==1)afun();
-			if(s==1){
+			
+			if(a==1){
 				
-				out.write(name+",字符数:"+Integer.toString(zCount()) + "\r\n");
-				out.write(name+",单词数:"+Integer.toString(efun()) + "\r\n");
-				out.write(name+",行数:"+Integer.toString(hCount()) + "\r\n");
+				afun();
+				
 			}
+			
 			
 		}
 		else{
-			//System.out.println("kaishichuli");
-			if(c==1)out.write(name+",字符数:"+Integer.toString(zCount()) + "\r\n"); // \r\n即为换行
-			if(w==1)out.write(name+",单词数:"+Integer.toString(ciCount()) + "\r\n");
 			
-			if(l==1)
-				out.write(name+",行数:"+Integer.toString(hCount()) + "\r\n");
+			
+			//System.out.println("kaishichuli--------"+l);
+			if(c==1)out.write(name+",字符数:"+Integer.toString(zCount()) + "\r\n"); // \r\n即为换行
+			if(w==1){
+			out.write(name+",单词数:"+Integer.toString(ciCount()) + "\r\n");	
+				
+		
+			}		
+			if(l==1)out.write(name+",行数:"+Integer.toString(hCount()) + "\r\n");
 			
 		
-			if(a==1) afun();
 			
-			if(s==1){
-				out.write(name+",字符数:"+Integer.toString(zCount()) + "\r\n");
-				out.write(name+",单词数:"+Integer.toString(ciCount()) + "\r\n");
-				out.write(name+",行数:"+Integer.toString(hCount()) + "\r\n");
-			}
 			
+//			
+//			if(a==1){
+//				 //System.out.println(fileName+",字符数:"+zCount());
+//				// afun();
+//			} 
 		}
 			//out.write(this.fileName+",代码行/空行/注释行:"+Integer.toString(ciCount()) + "\r\n");
 		//if(e==1)out.write(this.fileName+",行数:"+Integer.toString(hCount()) + "\r\n");
@@ -192,7 +198,7 @@ public class File2 {
 	public void afun() throws IOException {
 		// TODO Auto-generated method stub
 		int daima = 0, zhushi = 0, kong = 0;
-		
+		int isin = 0;
 		File f = new File(fileName);
 		 
 	       if (!f.exists())
@@ -209,7 +215,28 @@ public class File2 {
 		while ((line = br.readLine()) != null) {
 			daima++;
 			String pattern = ".*\\s*//.*";
-			boolean isMatch = Pattern.matches(pattern, line);	
+
+			String tou=".*\\/\\*.*";
+			String wei=".*\\*\\/.*";
+			
+			
+			boolean isMatch = Pattern.matches(pattern, line);
+			
+			
+			boolean isMatch5 = Pattern.matches(tou, line);	
+			boolean isMatch6 = Pattern.matches(wei, line);	
+			
+			if (isMatch5){
+				if(isin==0)zhushi++;
+				isin=1;
+			}
+				
+			if (isMatch6)
+				isin=0;
+			
+			if(isin==1){
+				zhushi++;
+			}
 			if (isMatch)
 				zhushi++;
 			
@@ -219,6 +246,7 @@ public class File2 {
 			boolean isMatch3 = Pattern.matches(pattern3, line);
 			String pattern4 = "\\s*";/*匹配空行*/
 			boolean isMatch4 = Pattern.matches(pattern4, line);
+			
 			
 			if (isMatch2||isMatch3||isMatch4)
 				kong++;
@@ -243,7 +271,7 @@ public class File2 {
 		String tmp;
 //		int stf=0;
 //		int inf=0;
-		
+		//System.out.println(stopfileName);
 		BufferedReader br2 = new BufferedReader(new FileReader(stopfileName));
 		while ((tmp = br2.readLine()) != null) {
 				 
@@ -262,7 +290,7 @@ public class File2 {
 				word="";
 			}
 		}
-		System.out.println();
+		//System.out.println();
 //----------------------------
 		String str21 = "";
 		String tmp1;
@@ -320,7 +348,7 @@ public class File2 {
 //		System.out.println("输入文件单词数"+inf);
 //		System.out.println("停表单词数"+stf);
 //		System.out.println("相同单词数："+(count));
-	    System.out.println(fileName+",单词数："+(sl2.size()-count));
+	  //  System.out.println(fileName+",单词数："+(sl2.size()-count));
 		return sl2.size()-count;
 	}
 	
